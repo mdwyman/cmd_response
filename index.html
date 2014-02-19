@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cmd_response &mdash; cmd_response 2014_01 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2014_01',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="cmd_response 2014_01 documentation" href="#" />
+    <link rel="next" title="Table of Contents" href="contents.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contents.html" title="Table of Contents"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">cmd_response 2014_01 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">cmd_response</a><ul>
+<li><a class="reference internal" href="#simple-command-response-access-via-usb-to-i-o-capabilities-of-arduino-microcontrollers">simple command/response access via USB to I/O capabilities of Arduino Microcontrollers</a><ul>
+<li><a class="reference internal" href="#i-o-system-interface">I/O System Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contents.html"
+                        title="next chapter">Table of Contents</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="cmd-response">
+<h1>cmd_response<a class="headerlink" href="#cmd-response" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="simple-command-response-access-via-usb-to-i-o-capabilities-of-arduino-microcontrollers">
+<h2>simple command/response access via USB to I/O capabilities of Arduino Microcontrollers<a class="headerlink" href="#simple-command-response-access-via-usb-to-i-o-capabilities-of-arduino-microcontrollers" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">author:</th><td class="field-body">Pete R. Jemian &lt;prjemian gmail com&gt;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">contributors:</th><td class="field-body">Keenan Lang</td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+<p>The Arduino family of microcontrollers possess a reasonable
+collection of input and output capabilities.  While there are
+different versions, each with some unique capabilities, most
+controllers have a USB port, some digital input and output ports,
+a few pulse-width modulated (PWM) digital ports, and some analog
+input ports.  This code module programs the Arduino with a
+simple command/response language via USB providing access to
+Arduino&#8217;s I/O capabilities.</p>
+<p>This code was developed, tested, and is known
+to operate properly using these Arduino boards:</p>
+<ul class="simple">
+<li>Arduino Uno R3</li>
+<li>OSEPP Uno R3</li>
+<li>Arduino Mega1280</li>
+<li>Arduino Mega2560</li>
+</ul>
+<div class="section" id="i-o-system-interface">
+<h3>I/O System Interface<a class="headerlink" href="#i-o-system-interface" title="Permalink to this headline">¶</a></h3>
+<p id="index-0">The Arduino can contribute its collection of
+I/O capabilities to an external control system,
+such as EPICS <a class="footnote-reference" href="#id2" id="id1">[1]</a>.  To EPICS (or some
+other control system), the Arduino appears as
+an I/O controller.
+To interface with an external system,
+a generic command language, independent of the
+details of the external system,
+is programmed into the Arduino
+and the board communicates over USB.
+This project is only useful for those Arduino boards
+which have an USB port.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://www.aps.anl.gov/epics">http://www.aps.anl.gov/epics</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contents.html" title="Table of Contents"
+             >next</a> |</li>
+        <li><a href="#">cmd_response 2014_01 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013,2014 Pete R Jemian.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

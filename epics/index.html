@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Example: Constant Lighting with EPICS &mdash; cmd_response 2014_01 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2014_01',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="cmd_response 2014_01 documentation" href="../index.html" />
+    <link rel="up" title="Table of Contents" href="../contents.html" />
+    <link rel="next" title="Installing EPICS" href="installing.html" />
+    <link rel="prev" title="Example: Python program sequence.py" href="../python/sequence.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installing.html" title="Installing EPICS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../python/sequence.html" title="Example: Python program sequence.py"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">cmd_response 2014_01 documentation</a> &raquo;</li>
+          <li><a href="../contents.html" accesskey="U">Table of Contents</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../python/sequence.html"
+                        title="previous chapter">Example: Python program <tt class="docutils literal"><span class="pre">sequence.py</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installing.html"
+                        title="next chapter">Installing EPICS</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/epics/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="example-constant-lighting-with-epics">
+<span id="epics"></span><span id="index-0"></span><h1>Example: Constant Lighting with EPICS<a class="headerlink" href="#example-constant-lighting-with-epics" title="Permalink to this headline">¶</a></h1>
+<div class="sidebar">
+<p class="first sidebar-title">EPICS jargon approaching!</p>
+<p>Now we start to introduce some of the terms used in EPICS,
+such as <em>record</em>, <em>database</em>, <em>asyn</em>, and <em>Streams</em>.
+We&#8217;ll try to explain the important ones as we go along.</p>
+<p>For more details, you might consider the first
+lecture or two in this series:
+&#8220;Getting Started with Epics Lecture Series at APS&#8221;,
+<a class="reference external" href="http://www.aps.anl.gov/epics/docs/GSWE.php">http://www.aps.anl.gov/epics/docs/GSWE.php</a></p>
+<table class="last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">EPICS:</th><td class="field-body">Experimental Physics and Industrial Control System,
+<a class="reference external" href="http://www.aps.anl.gov/epics">http://www.aps.anl.gov/epics</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Our goal here is to integrate the Arduino into EPICS
+using the <strong>cmd_response</strong> and demonstrate it as a
+sensor interface using PID controls.
+We&#8217;ll make <em>constant lighting</em> (maintain a constant level of lighting).
+Is this a useful thing to do?  It&#8217;s useful here to demonstrate
+how PID works in a very safe way; no moving parts, all contacts
+are low voltage and pose no significant electrical hazard.</p>
+<p>In our earlier Python example (see <a class="reference internal" href="../python/sequence.html#python-sequence"><em>Example: Python program sequence.py</em></a>),
+the live information from the Arduino was only available
+to the Python program.  In &#8220;real world&#8221; situation, control system
+information may come from many sources and be used for more than
+one purpose at the same time (such as: logging, operator visualization,
+process control, web page).
+EPICS is scalable, allowing for multiple servers and clients,
+and can easily integrate the signals
+from the Arduino as part of such a control system.</p>
+<p id="index-1">An EPICS system consists of many layers of components.
+Let&#8217;s visualize this <em>technology stack</em> with the Arduino at the root:</p>
+<ul class="simple" id="index-2">
+<li>you</li>
+<li>EPICS OPI (operator/programmer interface) client computer(s)</li>
+<li>EPICS Channel Access (over local computer network)</li>
+<li>EPICS IOC (input/output controller) server computer</li>
+<li>USB</li>
+<li>Arduino</li>
+</ul>
+<p>In previous examples, we
+described the components at the bottom of this technology
+stack (<em>Arduino</em> and <em>USB</em>).
+Moving upwards, our EPICS interface (where we integrate
+the Arduino with an EPICS IOC) consists of three files:</p>
+<ul class="simple">
+<li><a class="reference internal" href="installing.html#installing-epics"><em>Installing EPICS</em></a></li>
+<li><a class="reference internal" href="streams.html#streams-protocol"><em>Stream protocol</em></a></li>
+<li><a class="reference internal" href="database.html#pv-database"><em>EPICS database</em></a></li>
+<li><a class="reference internal" href="ioc.html#ioc-commands"><em>EPICS IOC startup commands</em></a></li>
+</ul>
+<p>Then we describe the tool to simplify observation of this system:</p>
+<ul class="simple">
+<li><a class="reference internal" href="cssboy.html#cssboy"><em>CSS BOY screen</em></a></li>
+</ul>
+<p>Finally, we describe the PID controls:</p>
+<ul class="simple">
+<li><a class="reference internal" href="epid.html#epid-example"><em>Example: Feedback using the epid record</em></a></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installing.html" title="Installing EPICS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../python/sequence.html" title="Example: Python program sequence.py"
+             >previous</a> |</li>
+        <li><a href="../index.html">cmd_response 2014_01 documentation</a> &raquo;</li>
+          <li><a href="../contents.html" >Table of Contents</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013,2014 Pete R Jemian.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
