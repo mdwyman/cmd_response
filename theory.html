@@ -8,7 +8,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Project Goals &mdash; cmd_response 2014.02.21 documentation</title>
+    <title>Project Goals &mdash; cmd_response 2014.02.21.02
+ documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +17,8 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2014.02.21',
+        VERSION:     '2014.02.21.02
+',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +28,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="cmd_response 2014.02.21 documentation" href="index.html" />
+    <link rel="top" title="cmd_response 2014.02.21.02
+ documentation" href="index.html" />
     <link rel="up" title="Table of Contents" href="contents.html" />
     <link rel="next" title="USB command interface" href="commands.html" />
     <link rel="prev" title="Table of Contents" href="contents.html" /> 
@@ -47,7 +50,8 @@
         <li class="right" >
           <a href="contents.html" title="Table of Contents"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">cmd_response 2014.02.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">cmd_response 2014.02.21.02
+ documentation</a> &raquo;</li>
           <li><a href="contents.html" accesskey="U">Table of Contents</a> &raquo;</li> 
       </ul>
     </div>
@@ -63,10 +67,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#basic-operations">Basic Operations</a></li>
-<li><a class="reference internal" href="#signal-averaging">Signal Averaging</a><ul>
-<li><a class="reference internal" href="#how-well-does-signal-averaging-work">How well does Signal Averaging work?</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#signal-averaging">Signal Averaging</a></li>
 <li><a class="reference internal" href="#startup">Startup</a></li>
 <li><a class="reference internal" href="#configuration-check">Configuration Check</a></li>
 <li><a class="reference internal" href="#epicsduino">epicsduino</a></li>
@@ -240,48 +241,6 @@ Limits of <span class="math">\(k\)</span> are found by requesting
 <p id="index-4">All <strong>watched channels</strong> are accumulated during each
 averaging period.  The averages (for just the watched channels)
 and update rate are recomputed <em>only</em> at the end of each period.</p>
-<div class="section" id="how-well-does-signal-averaging-work">
-<h3>How well does Signal Averaging work?<a class="headerlink" href="#how-well-does-signal-averaging-work" title="Permalink to this headline">¶</a></h3>
-<p>In the next figure are plotted (vs. time) the instantaneous
-signal (green), sampled regularly at twice per second and the
-time-averaged signal (red) as described.  Here, the averaging period
-is 0.5 seconds.  The sensor is a light-dependent resistor
-(photoresistor) sensing a slowly decreasing signal (the
-afternoon sun light intensity, also known as <em>ambient
-solar intensity</em>).</p>
-<div class="figure align-center">
-<img alt="fig.signal-averaging" src="_images/signal-averaging.png" style="width: 70%;" />
-<p class="caption">Ambient solar intensity vs. time.
-Green: instantaneous signal sampled at 2 Hz.
-Red: time-average signal with 0.5 second averaging time.
-(<a class="reference download internal" href="_downloads/signal-averaging.png"><tt class="xref download docutils literal"><span class="pre">signal-averaging.png</span></tt></a>)</p>
-</div>
-<p>Observe how the time-averaged signal does not vary smoothly
-with the slowly decreasing light level.  Instead, it follows
-more closely a smooth step-wise descent.  The steps correlate
-with the discrete values of the 10-bit ADC channel (see the
-green curve).</p>
-<p>About 15:43, the averaging period was changed to 1.0 seconds.
-The chart is shown again, with both older and newer data.
-Note the effect of passing clouds on the signal at 15:50 and 16:02.</p>
-<div class="figure align-center">
-<img alt="fig.signal-averaging-longer" src="_images/signal-averaging-longer.png" style="width: 70%;" />
-<p class="caption">Ambient solar intensity vs. time.
-Green: instantaneous signal sampled at 2 Hz.
-Red: time-average signal with 0.5 second averaging time
-(1.0 second averaging after 15:43).
-(<a class="reference download internal" href="_downloads/signal-averaging-longer.png"><tt class="xref download docutils literal"><span class="pre">signal-averaging-longer.png</span></tt></a>)</p>
-</div>
-<p>We conclude that the signal averaging method used here smooths
-the signal quite a bit but favors values close to the native
-precision of the ADC.
-The general trend of decreasing ambient solar intensity with time
-is apparent but we have gained an artefact that suggests the
-intensity is slowly oscillating.  This is not a natural phenomenon.
-For all our effort, we improved
-our immunity to the noise and variation of single ADC measurements,
-with only a modest increase in the precision of our measurement.</p>
-</div>
 </div>
 <div class="section" id="startup">
 <h2>Startup<a class="headerlink" href="#startup" title="Permalink to this headline">¶</a></h2>
@@ -365,7 +324,8 @@ Also, the SCPI commands are longer, and take more time to parse.</p>
         <li class="right" >
           <a href="contents.html" title="Table of Contents"
              >previous</a> |</li>
-        <li><a href="index.html">cmd_response 2014.02.21 documentation</a> &raquo;</li>
+        <li><a href="index.html">cmd_response 2014.02.21.02
+ documentation</a> &raquo;</li>
           <li><a href="contents.html" >Table of Contents</a> &raquo;</li> 
       </ul>
     </div>
