@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Example: Python program sequence.py &mdash; cmd_response 2014.02.21.02
+ documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2014.02.21.02
+',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="cmd_response 2014.02.21.02
+ documentation" href="../index.html" />
+    <link rel="up" title="Table of Contents" href="../contents.html" />
+    <link rel="next" title="Example: Constant Lighting with EPICS" href="../epics/index.html" />
+    <link rel="prev" title="Electronic Circuit: photocell and LED" href="../circuit/index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../epics/index.html" title="Example: Constant Lighting with EPICS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../circuit/index.html" title="Electronic Circuit: photocell and LED"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">cmd_response 2014.02.21.02
+ documentation</a> &raquo;</li>
+          <li><a href="../contents.html" accesskey="U">Table of Contents</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Example: Python program <tt class="docutils literal"><span class="pre">sequence.py</span></tt></a><ul>
+<li><a class="reference internal" href="#program-output">Program Output</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../circuit/index.html"
+                        title="previous chapter">Electronic Circuit: photocell and LED</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../epics/index.html"
+                        title="next chapter">Example: Constant Lighting with EPICS</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/python/sequence.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="example-python-program-sequence-py">
+<span id="python-sequence"></span><span id="index-0"></span><h1>Example: Python program <tt class="docutils literal"><span class="pre">sequence.py</span></tt><a class="headerlink" href="#example-python-program-sequence-py" title="Permalink to this headline">¶</a></h1>
+<p>A Python program was written to demonstrate
+how to communicate with the Arduino as an
+I/O controller using the <strong>cmd_response</strong>
+interface.</p>
+<p>Use the circuit described previously (see <a class="reference internal" href="../circuit/index.html#example-circuit"><em>Electronic Circuit: photocell and LED</em></a>):</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">PWM:</th><td class="field-body"><ul class="first simple">
+<li>pin 11: LED, pointing at the photocell, sets <span class="math">\(V_{LED}\)</span></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">AI:</th><td class="field-body"><ul class="first last simple">
+<li>pin 0: photocell, monitors <span class="math">\(V_P\)</span></li>
+<li>pin 1: LED supply voltage, monitors <span class="math">\(V_{LED}\)</span></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The basics of this program are:</p>
+<ul>
+<li><p class="first">attach to the USB port</p>
+<ul>
+<li><p class="first">On linux, confirm the USB connection using:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lsusb</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">FT232</span>
+<span class="go">Bus 005 Device 002: ID 0403:6001 Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">wait (arbitrary time) for the port to connect</p>
+</li>
+<li><p class="first">configure the PWM and averaging for a
+simple circuit, 0.1 s period, PWM on pin 11,
+AI on pins 0 and 1:</p>
+<div class="highlight-python"><pre>!t 100
+!ai:watch 0 1
+!ai:watch 1 1
+!pin 11 1</pre>
+</div>
+</li>
+<li><p class="first">wait a short time for the averaging period to set</p>
+</li>
+<li><p class="first">step the PWM (<span class="math">\(V_P\)</span>) through its range:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&#39;!pwm 11 </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">pwm</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">wait a short time for the ADC to settle
+and the averaging period to complete</p>
+</li>
+<li><p class="first">measure the AI channels (<span class="math">\(V_P\)</span> and <span class="math">\(V_{LED}\)</span>) several times at each step:</p>
+<div class="highlight-python"><pre>?ai 0
+?ai:mean 0
+?ai:mean 1</pre>
+</div>
+</li>
+</ul>
+<p>Note the difference between readings of <tt class="docutils literal"><span class="pre">?ai</span> <span class="pre">0</span></tt> and <tt class="docutils literal"><span class="pre">?ai:mean</span> <span class="pre">0</span></tt>.
+This shows the effectiveness of signal averaging.  <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Also see the Arduino <em>Smoothing</em> example: <a class="reference external" href="http://arduino.cc/en/Tutorial/Smoothing">http://arduino.cc/en/Tutorial/Smoothing</a></td></tr>
+</tbody>
+</table>
+<span class="target" id="module-sequence"></span><p>Exercise the Arduino cmd_response interface</p>
+<dl class="class">
+<dt id="sequence.Cmd_Response">
+<em class="property">class </em><tt class="descclassname">sequence.</tt><tt class="descname">Cmd_Response</tt><big>(</big><em>serial_port</em>, <em>baud=115200</em>, <em>delimiter='n'</em>, <em>timeout=2</em><big>)</big><a class="reference internal" href="../_modules/sequence.html#Cmd_Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sequence.Cmd_Response" title="Permalink to this definition">¶</a></dt>
+<dd><p>interface class with cmd_response Arduino sketch</p>
+<dl class="method">
+<dt id="sequence.Cmd_Response.receive">
+<tt class="descname">receive</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/sequence.html#Cmd_Response.receive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sequence.Cmd_Response.receive" title="Permalink to this definition">¶</a></dt>
+<dd><p>read the device response from the USB port</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sequence.Cmd_Response.report">
+<tt class="descname">report</tt><big>(</big><em>cmd</em><big>)</big><a class="reference internal" href="../_modules/sequence.html#Cmd_Response.report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sequence.Cmd_Response.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>print the response to the command</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sequence.Cmd_Response.request">
+<tt class="descname">request</tt><big>(</big><em>cmd</em><big>)</big><a class="reference internal" href="../_modules/sequence.html#Cmd_Response.request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sequence.Cmd_Response.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the result from the command</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sequence.Cmd_Response.send">
+<tt class="descname">send</tt><big>(</big><em>cmd</em><big>)</big><a class="reference internal" href="../_modules/sequence.html#Cmd_Response.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sequence.Cmd_Response.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>write the command to the USB port</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="sequence.main">
+<tt class="descclassname">sequence.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/sequence.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sequence.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>test the Arduino cmd_response interface</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sequence.measure">
+<tt class="descclassname">sequence.</tt><tt class="descname">measure</tt><big>(</big><em>port</em>, <em>pwm</em>, <em>reps=1</em><big>)</big><a class="reference internal" href="../_modules/sequence.html#measure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sequence.measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>report reading(s): LED  photocell  &lt;photocell&gt;</p>
+</dd></dl>
+
+<div class="section" id="program-output">
+<h2>Program Output<a class="headerlink" href="#program-output" title="Permalink to this headline">¶</a></h2>
+<p>The full output (<a class="reference download internal" href="../_downloads/results.txt"><tt class="xref download docutils literal"><span class="pre">results.txt</span></tt></a>),
+more than 600 lines, is too long for this documentation.
+Here are the first few lines, to give you an idea:</p>
+<div class="highlight-python"><pre>0 0 0.000 0.000
+5 55 50.812 18.393
+10 74 77.818 34.528
+15 92 97.936 57.812
+20 121 114.451 73.577
+25 118 128.521 98.010
+30 141 140.944 118.253
+35 160 152.141 132.800
+40 188 162.221 157.675
+45 201 171.575 178.688
+</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../epics/index.html" title="Example: Constant Lighting with EPICS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../circuit/index.html" title="Electronic Circuit: photocell and LED"
+             >previous</a> |</li>
+        <li><a href="../index.html">cmd_response 2014.02.21.02
+ documentation</a> &raquo;</li>
+          <li><a href="../contents.html" >Table of Contents</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013,2014 Pete R Jemian.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

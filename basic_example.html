@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Example: Getting started &mdash; cmd_response 2014.02.21.02
+ documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2014.02.21.02
+',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="cmd_response 2014.02.21.02
+ documentation" href="index.html" />
+    <link rel="up" title="Table of Contents" href="contents.html" />
+    <link rel="next" title="Electronic Circuit: photocell and LED" href="circuit/index.html" />
+    <link rel="prev" title="Error messages" href="errors.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="circuit/index.html" title="Electronic Circuit: photocell and LED"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="Error messages"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">cmd_response 2014.02.21.02
+ documentation</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">Table of Contents</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Example: Getting started</a><ul>
+<li><a class="reference internal" href="#is-our-sketch-running">Is our sketch running?</a></li>
+<li><a class="reference internal" href="#what-is-our-sketch-id">What is our sketch ID?</a></li>
+<li><a class="reference internal" href="#what-is-our-software-version">What is our software version?</a></li>
+<li><a class="reference internal" href="#light-the-on-board-led">Light the on-board LED</a></li>
+<li><a class="reference internal" href="#read-analog-input-channels-0-and-1">Read analog input channels: 0 and 1</a></li>
+<li><a class="reference internal" href="#test-the-voltage-of-a-aa-battery">Test the voltage of a AA battery</a></li>
+<li><a class="reference internal" href="#measuring-a-time-averaged-signal">Measuring a time-averaged signal</a></li>
+<li><a class="reference internal" href="#measured-scan-rates">Measured scan rates</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="errors.html"
+                        title="previous chapter">Error messages</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="circuit/index.html"
+                        title="next chapter">Electronic Circuit: photocell and LED</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/basic_example.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="example-getting-started">
+<span id="index-0"></span><h1>Example: Getting started<a class="headerlink" href="#example-getting-started" title="Permalink to this headline">¶</a></h1>
+<p>First, install and configure the Arduino software on your computer,
+install the <strong>cmd_response</strong> project where the Arduino software will find it,
+connect your Arduino board by USB to your computer,
+identify the board and serial port on the
+<em>Tools</em> menu, and upload the <strong>cmd_response</strong> sketch to your Arduino.</p>
+<p>Once these steps are complete,
+start a <em>Serial Monitor</em> session (again in the Arduino software tool).
+Be certain to set the end-of-line terminator to <em>Newline</em> and
+the BAUD rate to 115200 baud.  (See <a class="reference internal" href="commands.html#comm-parms"><em>Communications Parameters</em></a>.
+If you don&#8217;t do these two steps,
+your Arduino will not respond to your typed commands.)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Note about examples</p>
+<p>In all code examples below, command input to the Arduino
+is shown as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span> <span class="n">command</span>
+</pre></div>
+</div>
+<p class="last">Response from the Arduino appears on the next line.
+When entering commands, do not type the &#8220;&gt;&gt;&gt;&#8221; symbols.</p>
+</div>
+<div class="section" id="is-our-sketch-running">
+<span id="id1"></span><h2>Is our sketch running?<a class="headerlink" href="#is-our-sketch-running" title="Permalink to this headline">¶</a></h2>
+<p>When you open the serial monitor and it is set
+with the correct BAUD rate, then this message (or one very like it) appears:</p>
+<div class="highlight-python"><pre>cmd_response started: 1581</pre>
+</div>
+<p>This output is produced by the <strong>cmd_response</strong> sketch (from an OSEPP Uno).
+It tells us the sketch name and the amount of free RAM available.
+Likely, this last number is only of interest to those wishing
+to modify the <strong>cmd_response</strong> software for a larger vocabulary.</p>
+</div>
+<div class="section" id="what-is-our-sketch-id">
+<h2>What is our sketch ID?<a class="headerlink" href="#what-is-our-sketch-id" title="Permalink to this headline">¶</a></h2>
+<p>The ID string of the sketch is available:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?id
+cmd_response</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The ID command is a capability of the <strong>cmd_response</strong> sketch.
+Don&#8217;t expect it to work on any other sketches.</p>
+</div>
+</div>
+<div class="section" id="what-is-our-software-version">
+<h2>What is our software version?<a class="headerlink" href="#what-is-our-software-version" title="Permalink to this headline">¶</a></h2>
+<p>The software version number of the sketch is available:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?v
+2013-12-01</pre>
+</div>
+<p>This number is set in the sketch.</p>
+</div>
+<div class="section" id="light-the-on-board-led">
+<h2>Light the on-board LED<a class="headerlink" href="#light-the-on-board-led" title="Permalink to this headline">¶</a></h2>
+<p>Most Arduino boards have an LED connected to digital pin 13.</p>
+<p>Switch the on-board LED on:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; !bo 13 1
+Ok</pre>
+</div>
+<p>Switch the on-board LED off:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; !bo 13 0
+Ok</pre>
+</div>
+</div>
+<div class="section" id="read-analog-input-channels-0-and-1">
+<h2>Read analog input channels: 0 and 1<a class="headerlink" href="#read-analog-input-channels-0-and-1" title="Permalink to this headline">¶</a></h2>
+<p>You read the value of an analog input channel, such as channel 0:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?ai 0
+149</pre>
+</div>
+<p>Read channel 1:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?ai 1
+9</pre>
+</div>
+<p>Since there is no electrical circuit supplying a signal
+to either of these two analog inputs, the values appear to be random
+and are said to be <em>floating</em>.</p>
+<p>You stabilize the value returned by connecting a signal.
+The easiest available signals are either GND or 5V provided by the board.
+Connect a jumper wire from GND to ANALOG IN channel 0 and read again:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?ai 0
+0</pre>
+</div>
+<p>Remove the jumper wire and reconnect it to 5V and ANALOG IN channel 0, then read again:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?ai 0
+1023</pre>
+</div>
+</div>
+<div class="section" id="test-the-voltage-of-a-aa-battery">
+<h2>Test the voltage of a AA battery<a class="headerlink" href="#test-the-voltage-of-a-aa-battery" title="Permalink to this headline">¶</a></h2>
+<p>A single cell battery such as a AA <a class="footnote-reference" href="#id3" id="id2">[1]</a> makes a clean signal to test.
+Using a pair of jumper wires, connect one wire between GND and the
+<em>(-)</em> end of the battery.  Connect the other wire from ANALOG IN channel 1
+to the <em>(+)</em> end of the battery.  Hold these two wires firmly with one hand and read:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?ai 1
+310</pre>
+</div>
+<p>Using a little math, we divide the value returned by the full scale value of the
+analog input channel (1023) and then multiply by the full scale voltage of the
+analog inputs (5 VDC):  <span class="math">\(1.515 = (310/1023) \times 5\)</span>.</p>
+<p>At 1.515 VDC, this AA battery is still &#8220;good&#8221;
+(its voltage is close to the stated value of 1.5 VDC).</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Any single cell battery under 5 VDC
+(such as AA, AAA, AAAA, C, D, ...)
+makes a clean, quiet signal to test.
+Don&#8217;t use any signal more than 5 VDC
+(such as a 9 VDC battery)
+since it may damage your Arduino board.
+Also note, some Arduino boards have 3.3 VDC inputs.
+Take note what your board can handle.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="measuring-a-time-averaged-signal">
+<h2>Measuring a time-averaged signal<a class="headerlink" href="#measuring-a-time-averaged-signal" title="Permalink to this headline">¶</a></h2>
+<p>Some analog signals are not as quiet as the output from a battery.
+The <strong>cmd_response</strong> sketch has a feature to time-average the signal
+on selected analog input channels.
+For each channel monitored, the effective sampling rate <a class="footnote-reference" href="#id6" id="id4">[2]</a> drops
+as the program has more work to do.</p>
+<p>While the software can average
+all channels on the board, the averaging process takes some time.
+With no channels watched, the sampling rate of my board is:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?rate
+43907</pre>
+</div>
+<p>This means the main loop of the program is starting
+every 0.023 milliseconds (<span class="math">\(1/43907\)</span>),
+collecting data on any watched channels,
+averaging watched channels at the programmed interval,
+watching the input buffer (for user commands such as &#8220;<tt class="docutils literal"><span class="pre">?ai</span> <span class="pre">1</span></tt>&#8221;),
+and then processing the user command (if received).</p>
+<p>Once we start watching a channel, the effective sample rate is changed:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; !ai:watch 1
+Ok
+&gt;&gt;&gt; ?rate
+7327</pre>
+</div>
+<p>The the main loop of the program is starting every 0.136 milliseconds
+now (<span class="math">\(1/7327\)</span>) as the sketch collects the analog signal and
+periodically averages the values.</p>
+<p>The values are averaged on a constant period (<a class="reference internal" href="commands.html#get-period"><em>?t</em></a>)
+which defaults to 1 second (1000 ms):</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?t
+1000</pre>
+</div>
+<p>Read the time-averaged (1 second) value:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?ai:mean 1
+309074</pre>
+</div>
+<p>This value is the average (mean) value, scaled by a <em>multiplier</em> (<a class="reference internal" href="commands.html#get-k"><em>?k</em></a>).
+By default, the multiplier is 1000 (so the signal is 309074 mVDC):</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; ?k
+1000</pre>
+</div>
+<p>A multiplier is used so the value returned is an integer (as required by
+some common control software such as EPICS <a class="footnote-reference" href="#id7" id="id5">[3]</a>).  If the multiplier
+were set to one, then the effect of averaging would be lost by removing the
+decimal fraction.  Thus, a multiplier was introduced for convenience.</p>
+<p>You can change the multiplier to 10 to truncate the averages at 0.1 VDC:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; !k 10
+Ok
+&gt;&gt;&gt; ?ai:mean 1
+3090</pre>
+</div>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>effective sampling rate (<a class="reference internal" href="commands.html#get-rate"><em>?rate</em></a>): number of times per
+second each analog channel is read</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[3]</a></td><td>EPICS: <a class="reference internal" href="epics/index.html#epics"><em>Example: Constant Lighting with EPICS</em></a></td></tr>
+</tbody>
+</table>
+<p>Start averaging a second channel:</p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; !ai:watch 0
+Ok
+&gt;&gt;&gt; ?rate
+4030</pre>
+</div>
+<p>The main loop of the program is starting every 0.248 milliseconds
+now (<span class="math">\(1/4030\)</span>) as the sketch collects two analog signals and
+periodically averages their values.</p>
+</div>
+<div class="section" id="measured-scan-rates">
+<h2>Measured scan rates<a class="headerlink" href="#measured-scan-rates" title="Permalink to this headline">¶</a></h2>
+<p>These are the update rates and cycle times I measured on one
+of my boards (OSEPP Uno).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="34%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"># channels watched</th>
+<th class="head">updates per second</th>
+<th class="head">cycle time, ms</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>43907</td>
+<td>0.023</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>7327</td>
+<td>0.136</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>4030</td>
+<td>0.248</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>2838</td>
+<td>0.352</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>2153</td>
+<td>0.464</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>1736</td>
+<td>0.576</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>1451</td>
+<td>0.689</td>
+</tr>
+</tbody>
+</table>
+<p>This means that if to watch all 6 available channels (<a class="reference internal" href="commands.html#num-ai"><em>?#ai</em></a>),
+the shortest averaging period (<a class="reference internal" href="commands.html#set-period"><em>!t</em></a>) is 1 ms.  This will get
+only one sample.  The more reasonable shortest time is 10 ms, which will get
+about 14 samples per average.  Given that communications with a computer host
+also takes some time, an averaging period of 100 ms might be the shortest
+useful period, with 140 samples.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">To maximize the number of samples contributing to the average,
+only watch the channels you want to average.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="circuit/index.html" title="Electronic Circuit: photocell and LED"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="errors.html" title="Error messages"
+             >previous</a> |</li>
+        <li><a href="index.html">cmd_response 2014.02.21.02
+ documentation</a> &raquo;</li>
+          <li><a href="contents.html" >Table of Contents</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013,2014 Pete R Jemian.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
