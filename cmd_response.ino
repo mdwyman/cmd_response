@@ -54,6 +54,7 @@ void setup() {
   count = 0;
   rate = 0;
   nextUpdate = millis() + period;
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
@@ -141,6 +142,8 @@ void executeCommand() {
     if      (0 == strcmp(baseCmd, "?ai"))       readAI(inputString);
     else if (0 == strcmp(baseCmd, "?bi"))       readBI(inputString);
     else if (0 == strcmp(baseCmd, "!bo"))       writeBO(inputString);
+    else if (0 == strcmp(baseCmd, "?led"))      getLED(inputString);
+    else if (0 == strcmp(baseCmd, "!led"))      setLED(inputString);
     else if (0 == strcmp(baseCmd, "!pwm"))      writePWM(inputString);
     else if (0 == strcmp(baseCmd, "!pin"))      setPinMode(inputString);
     else if (0 == strcmp(baseCmd, "?#ai"))      get_num_ai_channels(inputString);
@@ -232,6 +235,26 @@ void writeBO(char* in) {
     digitalWrite(arg1, arg2);
     Serial.println(F("Ok"));
   }
+}
+
+void getLED(char* in) {
+  Serial.println(digitalRead(LED_BUILTIN));
+}
+
+void setLED(char* in) {
+  if (arg1 == 1) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    Serial.println(F("LED set high"));
+  }
+  else if (arg1 == 0) {
+    digitalWrite(LED_BUILTIN, LOW);
+    Serial.println(F("LED set low"));
+  }
+  else {
+    Serial.println(F("ERROR_UNKNOWN_LED_VALUE:"));
+    finalizeError(in);
+  }
+  
 }
 
 void writePWM(char* in) {
